@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+  
+  <canvas id="HexCanvas" width="2000" height="2500" style="border:1px solid #000000;"></canvas>
+  
+  <p1 id="p1"> Yes </p1>
+
+  {% load static %}
+  <img src="{% static "DeepWater.PNG" %}" alt="My image" width="50" height=50>
+  {% load static %}
+  <script src="{% static "hexagon.js" %}"></script>
+  <script>
+      var jsonStuff = JSON.parse('{{ hexes | safe }}');
+      var hexagonGrid = new HexagonGrid("HexCanvas", 50);
+      hexagonGrid.draw7kMap(jsonStuff);
+  
+      document.getElementById("p1").innerHTML = jsonStuff[2].fields.hexId;
+  </script>
+
+</body>
+</html>
